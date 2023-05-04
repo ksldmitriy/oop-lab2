@@ -1,0 +1,9 @@
+/*
+!.clang-format
+!.gitignore
+!src
+src/*
+!src/*.cpp
+!src/*.hpp
+!CMakeLists.txt
+!build.sh
