@@ -1,5 +1,6 @@
 #include "main.hpp"
 
 int main() {
-  cout << "Hello OOP world!" << endl;
+  Application app;
+  app.Run();
 }
