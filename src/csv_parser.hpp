@@ -5,6 +5,12 @@
 
 using namespace std;
 
+enum class CSVElementType{
+  StringElement = 0,
+  IntElement = 1,
+  FloatElement = 2
+};
+
 variant<string, int, float> typedef CSVElement;
 
 struct CSVLine{
