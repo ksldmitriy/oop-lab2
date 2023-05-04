@@ -21,6 +21,8 @@ CSVLine CSVParser::ParseLine(string raw_line) {
     CSVElement element = ParseElement(raw_element);
     elements.push_back(element);
   }
+
+  return CSVLine{elements};
 }
 
 CSVElement CSVParser::ParseElement(string raw_element) {
@@ -49,7 +51,11 @@ bool CSVParser::TryParseInt(string raw_element, int &number) {
   char *e;
   errno = 0;
 
-  number = strtoll(raw_element.data(), &e, 0);
+  try {
+    number = strtoll(raw_element.data(), &e, 0);
+  } catch (...) {
+    return false;
+  }
 
   return errno == 0 && raw_element.data() + raw_element.size() == e;
 }
@@ -58,7 +64,11 @@ bool CSVParser::TryParseFloat(string raw_element, float &number) {
   size_t read = 0;
   errno = 0;
 
-  number = stof(raw_element.data(), &read);
+  try {
+    number = stof(raw_element.data(), &read);
+  } catch (...) {
+    return false;
+  }
 
   return errno == 0 && raw_element.size() == read;
 }

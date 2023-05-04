@@ -1,6 +1,6 @@
 #pragma once
-#include "file_reader.hpp"
 #include "csv_parser.hpp"
+#include "file_reader.hpp"
 #include <filesystem>
 #include <iostream>
 #include <string>
@@ -10,9 +10,10 @@ namespace fs = filesystem;
 
 class Application {
 private:
+  void ProcessFile(fs::path filepath);
   vector<fs::path> GetDirectoryFiles(fs::path folder);
   vector<fs::path> GetCSVDirectoryFiles(fs::path folder);
-  vector<CSVTable> ParseFiles(vector<fs::path>);
+  vector<CSVTable> ParseFiles(vector<fs::path> csv_files);
 
 public:
   Application() = default;

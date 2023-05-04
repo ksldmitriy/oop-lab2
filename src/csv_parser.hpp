@@ -1,11 +1,12 @@
-#include <vector>
-#include <string>
 #include <sstream>
+#include <string>
 #include <variant>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
-enum class CSVElementType{
+enum class CSVElementType {
   StringElement = 0,
   IntElement = 1,
   FloatElement = 2
@@ -13,21 +14,22 @@ enum class CSVElementType{
 
 variant<string, int, float> typedef CSVElement;
 
-struct CSVLine{
+struct CSVLine {
   vector<CSVElement> elements;
 };
 
-struct CSVTable{
+struct CSVTable {
   vector<CSVLine> lines;
 };
 
-class CSVParser{
+class CSVParser {
 private:
-  bool TryParseInt(string raw_element, int& number);
-  bool TryParseFloat(string raw_element, float& number);
-  CSVElement ParseElement(string raw_element);
-  CSVLine ParseLine(string raw_line);
+  static bool TryParseInt(string raw_element, int &number);
+  static bool TryParseFloat(string raw_element, float &number);
+  static CSVElement ParseElement(string raw_element);
+  static CSVLine ParseLine(string raw_line);
+
 public:
-  CSVParser() = default;
-  CSVTable Parse(vector<string> raw_csv_table);
+  CSVParser() = delete;
+  static CSVTable Parse(vector<string> raw_csv_table);
 };
