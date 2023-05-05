@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo === CMAKE ===
 
 cmake -S ./src -B ./out  

@@ -3,34 +3,19 @@
 #include <string>
 #include <variant>
 #include <vector>
+#include "table.hpp"
 
 using namespace std;
 
-enum class CSVElementType : size_t {
-  StringElement = 0,
-  IntElement = 1,
-  FloatElement = 2
-};
-
-variant<string, int, float> typedef CSVElement;
-
-struct CSVLine {
-  vector<CSVElement> elements;
-};
-
-struct CSVTable {
-  vector<CSVLine> lines;
-};
-
 class CSVParser {
 private:
-  static bool IsEmptyLine(string raw_line);
+  static bool IsEmptyLine(string line);
   static bool TryParseInt(string raw_element, int &number);
   static bool TryParseFloat(string raw_element, float &number);
-  static CSVElement ParseElement(string raw_element);
-  static CSVLine ParseLine(string raw_line);
+  static TableElement ParseElement(string raw_element);
+  static TableRow ParseRow(string raw_row);
 
 public:
   CSVParser() = delete;
-  static CSVTable Parse(vector<string> raw_csv_table);
+  static Table Parse(vector<string> raw_csv_table);
 };

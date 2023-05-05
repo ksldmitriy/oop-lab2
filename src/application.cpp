@@ -10,14 +10,14 @@ void Application::Run() {
 
 void Application::ProcessFile(fs::path filepath) {
   vector<string> file_content = FileReader::ReadStringsFromFile(filepath);
-  CSVTable table = CSVParser::Parse(file_content);
+  Table table = CSVParser::Parse(file_content);
   if (IsValidTable(table)) {
     cout << "is valid table" << endl;
   }
   cout << endl;
 }
 
-bool Application::IsValidTable(CSVTable &table) {
+bool Application::IsValidTable(Table &table) {
   if (table.lines.size() < 1) {
     return false;
   }
@@ -25,12 +25,12 @@ bool Application::IsValidTable(CSVTable &table) {
     return false;
   }
   if (table.lines[0].elements[0].index() !=
-      (size_t)CSVElementType::IntElement) {
+      (size_t)TableElementType::IntElement) {
     return false;
   }
 
   int lines_count =
-      get<(size_t)CSVElementType::IntElement>(table.lines[0].elements[0]);
+      get<(size_t)TableElementType::IntElement>(table.lines[0].elements[0]);
 
   if (lines_count + 1 != table.lines.size()) {
     cout << "l " << lines_count + 1 << " " << table.lines.size() << endl;
@@ -38,19 +38,19 @@ bool Application::IsValidTable(CSVTable &table) {
   }
 
   for (int i = 1; i < table.lines.size(); i++) {
-    CSVLine &line = table.lines[i];
+    TableRow &line = table.lines[i];
 
     if (line.elements.size() != 21) {
       return false;
     }
 
-    if (line.elements[0].index() != (size_t)CSVElementType::StringElement) {
+    if (line.elements[0].index() != (size_t)TableElementType::StringElement) {
       return false;
     }
 
     cout << 3 << endl;
     for (int j = 1; j < line.elements.size(); j++) {
-      if (line.elements[j].index() != (size_t)CSVElementType::IntElement) {
+      if (line.elements[j].index() != (size_t)TableElementType::IntElement) {
         return false;
       }
     }

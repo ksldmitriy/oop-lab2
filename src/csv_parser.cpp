@@ -1,22 +1,22 @@
 #include "csv_parser.hpp"
 
-CSVTable CSVParser::Parse(vector<string> raw_csv_table) {
-  CSVTable table;
+Table CSVParser::Parse(vector<string> raw_csv_table) {
+  Table table;
 
-  for (string &raw_line : raw_csv_table) {
-    if (IsEmptyLine(raw_line)) {
+  for (string &raw_row : raw_csv_table) {
+    if (IsEmptyLine(raw_row)) {
       continue;
     }
 
-    CSVLine line = ParseLine(raw_line);
-    table.lines.push_back(line);
+    TableRow row = ParseRow(raw_row);
+    table.lines.push_back(row);
   }
 
   return table;
 }
 
-bool CSVParser::IsEmptyLine(string raw_line) {
-  for (auto i : raw_line) {
+bool CSVParser::IsEmptyLine(string line) {
+  for (auto i : line) {
     if (isprint(i)) {
       return false;
     }
@@ -25,22 +25,22 @@ bool CSVParser::IsEmptyLine(string raw_line) {
   return true;
 }
 
-CSVLine CSVParser::ParseLine(string raw_line) {
-  stringstream raw_line_stream(raw_line);
+TableRow CSVParser::ParseRow(string raw_row) {
+  stringstream raw_row_stream(raw_row);
   string raw_element;
 
-  vector<CSVElement> elements;
+  vector<TableElement> elements;
 
-  while (getline(raw_line_stream, raw_element, ',')) {
-    CSVElement element = ParseElement(raw_element);
+  while (getline(raw_row_stream, raw_element, ',')) {
+    TableElement element = ParseElement(raw_element);
     elements.push_back(element);
   }
 
-  return CSVLine{elements};
+  return TableRow{elements};
 }
 
-CSVElement CSVParser::ParseElement(string raw_element) {
-  CSVElement element;
+TableElement CSVParser::ParseElement(string raw_element) {
+  TableElement element;
   bool is_parsed;
 
   int int_element;
