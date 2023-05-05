@@ -11,6 +11,52 @@ void Application::Run() {
 void Application::ProcessFile(fs::path filepath) {
   vector<string> file_content = FileReader::ReadStringsFromFile(filepath);
   CSVTable table = CSVParser::Parse(file_content);
+  if (IsValidTable(table)) {
+    cout << "is valid table" << endl;
+  }
+  cout << endl;
+}
+
+bool Application::IsValidTable(CSVTable &table) {
+  if (table.lines.size() < 1) {
+    return false;
+  }
+  if (table.lines[0].elements.size() != 1) {
+    return false;
+  }
+  if (table.lines[0].elements[0].index() !=
+      (size_t)CSVElementType::IntElement) {
+    return false;
+  }
+
+  int lines_count =
+      get<(size_t)CSVElementType::IntElement>(table.lines[0].elements[0]);
+
+  if (lines_count + 1 != table.lines.size()) {
+    cout << "l " << lines_count + 1 << " " << table.lines.size() << endl;
+    return false;
+  }
+
+  for (int i = 1; i < table.lines.size(); i++) {
+    CSVLine &line = table.lines[i];
+
+    if (line.elements.size() != 21) {
+      return false;
+    }
+
+    if (line.elements[0].index() != (size_t)CSVElementType::StringElement) {
+      return false;
+    }
+
+    cout << 3 << endl;
+    for (int j = 1; j < line.elements.size(); j++) {
+      if (line.elements[j].index() != (size_t)CSVElementType::IntElement) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 }
 
 vector<fs::path> Application::GetCSVDirectoryFiles(fs::path folder) {

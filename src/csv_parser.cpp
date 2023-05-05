@@ -4,11 +4,25 @@ CSVTable CSVParser::Parse(vector<string> raw_csv_table) {
   CSVTable table;
 
   for (string &raw_line : raw_csv_table) {
+    if (IsEmptyLine(raw_line)) {
+      continue;
+    }
+
     CSVLine line = ParseLine(raw_line);
     table.lines.push_back(line);
   }
 
   return table;
+}
+
+bool CSVParser::IsEmptyLine(string raw_line) {
+  for (auto i : raw_line) {
+    if (isprint(i)) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 CSVLine CSVParser::ParseLine(string raw_line) {

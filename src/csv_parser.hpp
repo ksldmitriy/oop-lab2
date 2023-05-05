@@ -1,12 +1,12 @@
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <variant>
 #include <vector>
-#include <iostream>
 
 using namespace std;
 
-enum class CSVElementType {
+enum class CSVElementType : size_t {
   StringElement = 0,
   IntElement = 1,
   FloatElement = 2
@@ -24,6 +24,7 @@ struct CSVTable {
 
 class CSVParser {
 private:
+  static bool IsEmptyLine(string raw_line);
   static bool TryParseInt(string raw_element, int &number);
   static bool TryParseFloat(string raw_element, float &number);
   static CSVElement ParseElement(string raw_element);
