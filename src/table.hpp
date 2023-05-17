@@ -6,12 +6,17 @@
 
 using namespace std;
 
-class invalid_table_elemet_request : public exception {};
-
 enum class TableElementType : size_t {
   StringElement = 0,
   IntElement = 1,
   FloatElement = 2
+};
+
+class TableElementAccessException : public exception {
+private:
+public:
+  TableElementAccessException() = default;
+  const char *what();
 };
 
 class TableElement {

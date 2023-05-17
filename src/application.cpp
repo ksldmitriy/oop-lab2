@@ -6,11 +6,15 @@ void Application::Run() {
   for (auto &filepath : csv_files) {
     ProcessFile(filepath);
   }
+
+  CompetitionResults competition_results(voting_results_deserializer.GetVotes());
 }
 
 void Application::ProcessFile(fs::path filepath) {
   vector<string> file_content = FileReader::ReadStringsFromFile(filepath);
   Table table = CSVParser::Parse(file_content);
+
+  voting_results_deserializer.LoadVotesTable(table);
 }
 
 vector<fs::path> Application::GetCSVDirectoryFiles(fs::path folder) {

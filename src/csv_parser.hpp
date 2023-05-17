@@ -17,5 +17,5 @@ private:
 
 public:
   CSVParser() = delete;
-  static Table Parse(vector<string> raw_csv_table);
+  static Table Parse(vector<string>& raw_csv_table);
 };

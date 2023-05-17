@@ -4,12 +4,16 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
+#include "voting_results_deserializer.hpp"
 
 using namespace std;
 namespace fs = filesystem;
 
 class Application {
 private:
+  VotingResultsDeserializer voting_results_deserializer;
+  CompetitionResults voting_results;
+
   void ProcessFile(fs::path filepath);
   vector<fs::path> GetDirectoryFiles(fs::path folder);
   vector<fs::path> GetCSVDirectoryFiles(fs::path folder);

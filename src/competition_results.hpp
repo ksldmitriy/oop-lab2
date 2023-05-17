@@ -1,23 +1,20 @@
 #pragma once
-#include "table.hpp"
+#include <iostream>
 #include <array>
 #include <map>
-#include <stdexcept>
+#include <string>
 
 using namespace std;
 
-//class 
+static constexpr int voters_count = 20;
+
+array<int, voters_count> typedef Votes;
 
 class CompetitionResults {
 private:
-  static constexpr int voters_count = 20;
-  
-  array<int, voters_count> typedef Votes;
   map<string, Votes> votes;
-
-  Votes ReadVotesFromTableRow(TableRow &table_row);
 
 public:
   CompetitionResults() = default;
-  void LoadVotesTable(Table &votes_table);
+  CompetitionResults(map<string, Votes> votes);
 };

@@ -1,6 +1,6 @@
 #include "csv_parser.hpp"
 
-Table CSVParser::Parse(vector<string> raw_csv_table) {
+Table CSVParser::Parse(vector<string> &raw_csv_table) {
   Table table;
 
   for (string &raw_row : raw_csv_table) {

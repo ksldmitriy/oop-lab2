@@ -8,7 +8,7 @@ TableElement::TableElement(float number) { value = number; }
 
 string TableElement::GetString() {
   if (value.index() != 0) {
-	throw invalid_table_elemet_request();
+    throw TableElementAccessException();
   }
 
   return get<string>(value);
@@ -16,7 +16,7 @@ string TableElement::GetString() {
 
 int TableElement::GetInt() {
   if (value.index() != 1) {
-	throw invalid_table_elemet_request();
+    throw TableElementAccessException();
   }
 
   return get<int>(value);
@@ -24,7 +24,7 @@ int TableElement::GetInt() {
 
 float TableElement::GetFloat() {
   if (value.index() != 2) {
-	throw invalid_table_elemet_request();
+    throw TableElementAccessException();
   }
 
   return get<float>(value);
@@ -32,4 +32,8 @@ float TableElement::GetFloat() {
 
 TableElementType TableElement::GetType() {
   return (TableElementType)value.index();
+}
+
+const char *TableElementAccessException::what() {
+  return "trying to read table element with wrong type sepcified";
 }
