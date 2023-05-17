@@ -46,18 +46,18 @@ TableElement CSVParser::ParseElement(string raw_element) {
   int int_element;
   is_parsed = TryParseInt(raw_element, int_element);
   if (is_parsed) {
-    element = int_element;
+    element = TableElement(int_element);
     return element;
   }
 
   float float_element;
   is_parsed = TryParseFloat(raw_element, float_element);
   if (is_parsed) {
-    element = float_element;
+    element = TableElement(float_element);
     return element;
   }
 
-  element = raw_element;
+  element = TableElement(raw_element);
   return element;
 }
 

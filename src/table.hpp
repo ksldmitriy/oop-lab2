@@ -1,8 +1,12 @@
+#pragma once
+#include <exception>
 #include <string>
-#include <vector>
 #include <variant>
+#include <vector>
 
 using namespace std;
+
+class invalid_table_elemet_request : public exception {};
 
 enum class TableElementType : size_t {
   StringElement = 0,
@@ -10,7 +14,22 @@ enum class TableElementType : size_t {
   FloatElement = 2
 };
 
-variant<string, int, float> typedef TableElement;
+class TableElement {
+private:
+  variant<string, int, float> value;
+
+public:
+  TableElement() = default;
+  TableElement(string str);
+  TableElement(int number);
+  TableElement(float number);
+
+  string GetString();
+  int GetInt();
+  float GetFloat();
+
+  TableElementType GetType();
+};
 
 struct TableRow {
   vector<TableElement> elements;

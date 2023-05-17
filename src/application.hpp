@@ -11,7 +11,6 @@ namespace fs = filesystem;
 class Application {
 private:
   void ProcessFile(fs::path filepath);
-  bool IsValidTable(Table& table);
   vector<fs::path> GetDirectoryFiles(fs::path folder);
   vector<fs::path> GetCSVDirectoryFiles(fs::path folder);
 
