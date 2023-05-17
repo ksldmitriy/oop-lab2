@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
+#include "points_counter.hpp"
 #include <array>
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -12,9 +13,14 @@ array<int, voters_count> typedef Votes;
 
 class CompetitionResults {
 private:
-  map<string, Votes> votes;
+  // map<string, Votes> votes;
+  vector<string> countries;
+  vector<Votes> votes;
+
+  void CountPointsFromVoter(vector<int> &total_points, int voter);
 
 public:
   CompetitionResults() = default;
   CompetitionResults(map<string, Votes> votes);
+  void CountPoints();
 };

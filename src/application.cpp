@@ -8,6 +8,7 @@ void Application::Run() {
   }
 
   CompetitionResults competition_results(voting_results_deserializer.GetVotes());
+  competition_results.CountPoints();
 }
 
 void Application::ProcessFile(fs::path filepath) {
