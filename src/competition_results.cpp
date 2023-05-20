@@ -8,16 +8,28 @@ CompetitionResults::CompetitionResults(map<string, Votes> votes) {
   }
 }
 
-void CompetitionResults::CountPoints() {
+vector<CompetitionPlace> CompetitionResults::CountPoints() {
   vector<int> points(votes.size(), 0);
 
   for (int i = 0; i < voters_count; i++) {
     CountPointsFromVoter(points, i);
   }
 
+  vector<CompetitionPlace> places;
+
   for (int i = 0; i < votes.size(); i++) {
-	cout << countries[i] << " " << points[i] << endl;
+    CompetitionPlace place;
+    place.country = countries[i];
+    place.points = points[i];
+    places.push_back(place);
   }
+
+  sort(places.begin(), places.end(),
+       [](const CompetitionPlace &p1, const CompetitionPlace &p2) {
+         return p1.points > p2.points;
+       });
+
+  return places;
 }
 
 void CompetitionResults::CountPointsFromVoter(vector<int> &total_points,

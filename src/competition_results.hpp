@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,9 +12,13 @@ static constexpr int voters_count = 20;
 
 array<int, voters_count> typedef Votes;
 
+struct CompetitionPlace {
+  string country;
+  int points;
+};
+
 class CompetitionResults {
 private:
-  // map<string, Votes> votes;
   vector<string> countries;
   vector<Votes> votes;
 
@@ -22,5 +27,5 @@ private:
 public:
   CompetitionResults() = default;
   CompetitionResults(map<string, Votes> votes);
-  void CountPoints();
+  vector<CompetitionPlace> CountPoints();
 };

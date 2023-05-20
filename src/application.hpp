@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "voting_results_deserializer.hpp"
+#include "file_finder.hpp"
 
 using namespace std;
 namespace fs = filesystem;
@@ -15,8 +16,6 @@ private:
   CompetitionResults voting_results;
 
   void ProcessFile(fs::path filepath);
-  vector<fs::path> GetDirectoryFiles(fs::path folder);
-  vector<fs::path> GetCSVDirectoryFiles(fs::path folder);
 
 public:
   Application() = default;
